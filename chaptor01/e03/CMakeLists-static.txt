@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
+project(e03 LANGUAGES CXX)
+
+# 创建静态库
+add_library(message
+	STATIC
+	message.cpp)
+
+add_executable(e03 e03.cpp)
+
+target_link_libraries(e03 message)
