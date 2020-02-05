@@ -8,6 +8,30 @@ set_target_properties(message-shared
   PROPERTIES
     SOVERSION ${PROJECT_VERSION_MAJOR}
   )
+# 安装头文件
+set(EXPORT_HEADERS
+    ${PROJECT_INCLUDE_DIR}/jsonrpc.h
+    ${PROJECT_INCLUDE_DIR}/jsonrpc_client.h
+    ${PROJECT_INCLUDE_DIR}/jsonrpc_common.h
+    ${PROJECT_INCLUDE_DIR}/jsonrpc_handler.h
+    ${PROJECT_INCLUDE_DIR}/jsonrpc_httpclient.h
+    ${PROJECT_INCLUDE_DIR}/jsonrpc_server.h
+    ${PROJECT_INCLUDE_DIR}/jsonrpc_tcpclient.h
+    ${PROJECT_INCLUDE_DIR}/jsonrpc_tcpserver.h
+    ${PROJECT_INCLUDE_DIR}/jsonrpc_udpclient.h
+    ${PROJECT_INCLUDE_DIR}/jsonrpc_udpserver.h
+    ${PROJECT_INCLUDE_DIR}/netstring.h
+    ${PROJECT_INCLUDE_DIR}/networking.h
+    ${PROJECT_INCLUDE_DIR}/system.h)
+
+## PUBLIC_HEADER需要用""
+set_target_properties(jsonrpc
+  PROPERTIES
+    POSITION_INDEPENDENT_CODE 1
+    PUBLIC_HEADER "${EXPORT_HEADERS}"
+    WINDOWS_EXPORT_ALL_SYMBOLS ON
+  )
+
 
 # 安装所有文件
 install(
@@ -24,7 +48,7 @@ install(
     DESTINATION ${INSTALL_LIBDIR}
     COMPONENT lib
   PUBLIC_HEADER
-    DESTINATION ${INSTALL_INCLUDEDIR}/message
+    DESTINATION ${INSTALL_INCLUDEDIR}
     COMPONENT dev
   )
 
